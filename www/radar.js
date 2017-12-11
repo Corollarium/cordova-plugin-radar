@@ -3,11 +3,14 @@
 const cordova = require('cordova');
 
 const exec = (successCallback, errorCallback, action, args) => {
-	cordova.exec(
-		callback,
-		errorCallback || (error) => {
+	if (!errorCallback) {
+		errorCallback = (error) => {
 			console.log(error);
-		}, 
+		};
+	}
+	cordova.exec(
+		successCallback,
+		errorCallback, 
 		'radar', 
 		action, 
 		args
@@ -17,7 +20,7 @@ const exec = (successCallback, errorCallback, action, args) => {
 var radarExport = {};
 
 radarExport.initialize = function(key) {
-	exec(successCallback, errorCallback, "initialize", [key]);
+	exec(() => {}, null, "initialize", [key]);
 };
 
 radarExport.setUserId = function(id, successCallback, errorCallback) {
