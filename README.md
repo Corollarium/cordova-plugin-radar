@@ -13,7 +13,7 @@ $ cordova plugin install cordova-plugin-radar
 
 ## Usage
 
-(Check the main documentation)[https://www.onradar.com/documentation/sdk] for details.
+[Check the main documentation](https://www.onradar.com/documentation/sdk) for details.
 
 ### Initialize
 
