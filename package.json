@@ -1,0 +1,43 @@
+{
+  "name": "cordova-plugin-radar",
+  "description": "Cordova plugin for Radar, the location platform for mobile apps",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "cordova": {
+    "id": "cordova-plugin-radar",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Corollarium/cordova-plugin-radar.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "cordova:plugin"
+  ],
+  "engines": {
+    "cordovaDependencies": {
+      "7.0.0": {
+        "cordova-android": ">=6.3.0"
+      }
+    }
+  },
+  "author": "Corollarium",
+  "bugs": {
+    "url": "https://github.com/Corollarium/cordova-plugin-radar/issues"
+  },
+  "homepage": "https://github.com/Corollarium/cordova-plugin-radar#readme",
+  "scripts": {
+    "test": "jasmine-node --color spec"
+  },
+  "devDependencies": {
+    "jasmine-node": "1.14.5",
+    "pluginpub": "^0.0.9"
+  }
+}
