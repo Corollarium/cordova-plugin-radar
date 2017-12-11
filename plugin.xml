@@ -25,7 +25,7 @@
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 		</config-file>
-		<framework src="com.onradar:sdk:1.1.+"/>
+		<framework src="com.onradar:sdk:1.2.+"/>
 	</platform>
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
@@ -37,6 +37,6 @@
 		<header-file src="src/ios/CDVRadarUtils.h" />
 		<source-file src="src/ios/CDVRadar.m" />
 		<source-file src="src/ios/CDVRadarUtils.m" />
-		<framework src="RadarSDK" type="podspec" spec="~> 1.1" />
+		<framework src="RadarSDK" type="podspec" spec="~> 1.2" />
 	</platform>
 </plugin>
