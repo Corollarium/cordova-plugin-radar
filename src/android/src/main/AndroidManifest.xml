@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.onradar.cordova">
+
+    <application>
+        <receiver
+            android:name=".RadarCordovaPlugin$RadarCordovaReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.onradar.sdk.RECEIVED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
