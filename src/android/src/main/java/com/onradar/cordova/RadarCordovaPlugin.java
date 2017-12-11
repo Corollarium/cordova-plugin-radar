@@ -62,9 +62,11 @@ public class RadarCordovaPlugin extends CordovaPlugin {
     public void init(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final String key = args.getString(0);
 
-        Radar.initialize(this, key);
+        final Activity activity = this.cordova.getActivity();
+        Radar.initialize(activity, key);
+
         if (!Radar.checkSelfPermissions()) {
-            Radar.requestPermissions(this);
+            Radar.requestPermissions(activity);
         }
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
@@ -88,14 +90,14 @@ public class RadarCordovaPlugin extends CordovaPlugin {
     public void setPlacesProvider(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final String provider = args.getString(0);
 
-        RadarPlacesProvider p;
+        Radar.RadarPlacesProvider p;
         if ("facebook".equals(provider)) {
             p = Radar.RadarPlacesProvider.FACEBOOK;
         }
         else {
             p = Radar.RadarPlacesProvider.NONE;
         }
-        Radar.setPlacesProvider(provider);
+        Radar.setPlacesProvider(p);
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
     }
