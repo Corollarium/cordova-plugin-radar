@@ -80,7 +80,6 @@ public class RadarCordovaPlugin extends CordovaPlugin {
 
     public void setDescription(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final String description = args.getString(0);
-
         Radar.setDescription(description);
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
@@ -89,6 +88,13 @@ public class RadarCordovaPlugin extends CordovaPlugin {
     public void setPlacesProvider(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final String provider = args.getString(0);
 
+        RadarPlacesProvider p;
+        if ("facebook".equals(provider)) {
+            p = Radar.RadarPlacesProvider.FACEBOOK;
+        }
+        else {
+            p = Radar.RadarPlacesProvider.NONE;
+        }
         Radar.setPlacesProvider(provider);
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
