@@ -41,6 +41,10 @@ public class RadarCordovaPlugin extends CordovaPlugin {
             startTracking(args, callbackContext);
         else if (action.equals("stopTracking"))
             stopTracking(args, callbackContext);
+        else if (action.equals("acceptEvent"))
+            startTracking(args, callbackContext);
+        else if (action.equals("rejectEvent"))
+            stopTracking(args, callbackContext);
         else if (action.equals("trackOnce"))
             trackOnce(args, callbackContext);
         else if (action.equals("updateLocation"))
@@ -127,6 +131,24 @@ public class RadarCordovaPlugin extends CordovaPlugin {
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
     }
+
+    public void acceptEvent(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        final String eventId = args.getString(0);
+        final String placeId = args.getString(1);
+
+        Radar.acceptEvent(eventId, placeId);
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+    }
+
+    public void rejectEvent(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
+        final String eventId = args.getString(0);
+
+        Radar.rejectEvent(eventId);
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
+    }
+
 
     public void trackOnce(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
       Radar.trackOnce(new RadarCallback() {
