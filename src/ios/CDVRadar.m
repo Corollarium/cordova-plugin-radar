@@ -54,6 +54,15 @@ NSString *errorCallbackId;
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)setPlacesProvider:(CDVInvokedUrlCommand *)command {
+    NSString *placeProvider = [command.arguments objectAtIndex:0];
+
+    [Radar setPlaceProvider:placeProvider]; // TODO: check this
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)getPermissionsStatus:(CDVInvokedUrlCommand *)command {
     CLAuthorizationStatus status = [Radar authorizationStatus];
 
@@ -86,6 +95,27 @@ NSString *errorCallbackId;
 
 - (void)stopTracking:(CDVInvokedUrlCommand *)command {
     [Radar stopTracking];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)acceptEvent:(CDVInvokedUrlCommand *)command {
+    // TODO: review
+    NSString *eventId = [command.arguments objectAtIndex:0];
+    NSString *placeId = [command.arguments objectAtIndex:1];
+
+    [Radar acceptEvent:eventId placeId];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)rejectEvent:(CDVInvokedUrlCommand *)command {
+    // TODO: review
+    NSString *eventId = [command.arguments objectAtIndex:0];
+
+    [Radar rejectEvent:eventId];
 
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
