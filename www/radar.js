@@ -63,8 +63,8 @@ radarExport.rejectEvent = function(eventId) {
 	exec(() => {}, null, "rejectEvent", [eventId]);
 };
 
-radarExport.updateLocation = function(location, callback) {
-	exec(callback, null, "updateLocation", [location]);
+radarExport.updateLocation = function(location, callback, errorCallback) {
+	exec(callback, errorCallback, "updateLocation", [location]);
 };
 
 radarExport.onEvents = function(callback) {

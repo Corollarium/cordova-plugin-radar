@@ -13,23 +13,24 @@ $ cordova plugin install cordova-plugin-radar
 
 ## Usage
 
-[Check the main documentation](https://www.onradar.com/documentation/sdk) for details.
+[Check the main documentation](https://www.onradar.com/documentation/sdk) for details. There's a 
+[basic test app example](https://github.com/Corollarium/cordova-plugin-radar-example) as well.
 
 ### Initialize
 
 Register and get your keys.
 
 ```js
-Radar.initialize(key);
+cordova.plugins.radar.initialize(key);
 ```
 
 
 ### Identify user
 
-Before tracking the user's location, you must identify the user to Radar. To identify the user, call:
+Before tracking the user's location, you must identify the user to cordova.plugins.radar. To identify the user, call:
 
 ```js
-Radar.setUserId(userId);
+cordova.plugins.radar.setUserId(userId);
 ```
 
 where `userId` is a stable unique ID string for the user.
@@ -37,7 +38,7 @@ where `userId` is a stable unique ID string for the user.
 To set an optional description for the user, displayed in the dashboard, call:
 
 ```js
-Radar.setDescription(description);
+cordova.plugins.radar.setDescription(description);
 ```
 
 where `description` is a string.
@@ -49,17 +50,18 @@ You only need to call these methods once, as these settings will be persisted ac
 To set Facebook as your place data provider, call:
 
 ```js
-Radar.setPlacesProvider(Radar.RadarPlacesProvider.FACEBOOK);
+cordova.plugins.radar.setPlacesProvider('facebook');
 ```
 
 ### Request permissions
 
-Before tracking the user's location, the user must have granted location permissions for the app.
+Before tracking the user's location, the user must have granted location permissions for the app. These
+are requested automatically when you initialized radar.
 
 To determine the whether user has granted location permissions for the app, call:
 
 ```js
-Radar.getPermissionsStatus().then((status) => {
+cordova.plugins.radar.getPermissionsStatus().then((status) => {
   // do something with status
 });
 ```
@@ -73,7 +75,7 @@ Radar.getPermissionsStatus().then((status) => {
 To request location permissions for the app, call:
 
 ```js
-Radar.requestPermissions(background);
+cordova.plugins.radar.requestPermissions(background);
 ```
 
 where `background` is a boolean indicating whether to request background location permissions or foreground location permissions. On Android, `background` will be ignored.
@@ -85,7 +87,7 @@ Once you have initialized the SDK, you have identified the user, and the user ha
 To track the user's location in the foreground, call:
 
 ```js
-Radar.trackOnce().then((result) => {
+cordova.plugins.radar.trackOnce().then((result) => {
   // do something with result.location, result.events, result.user.geofences
 }).catch((err) => {
   // optionally, do something with err
@@ -110,13 +112,13 @@ Once you have initialized the SDK, you have identified the user, and the user ha
 To start tracking the user's location in the background, call:
 
 ```js
-Radar.startTracking();
+cordova.plugins.radar.startTracking();
 ```
 
 To stop tracking the user's location in the background (e.g., when the user logs out), call:
 
 ```js
-Radar.stopTracking();
+cordova.plugins.radar.stopTracking();
 ```
 
 You only need to call these methods once, as these settings will be persisted across app sessions.
@@ -124,21 +126,24 @@ You only need to call these methods once, as these settings will be persisted ac
 To listen for events and errors, you can add event listeners:
 
 ```js
-Radar.on('events', (result) => {
-  // do something with result.events, result.user
-});
+cordova.plugins.radar.onEvents(
+	(events, user) => {
+		// do something with result.events, result.user
+	}
+);
 
-Radar.on('error', (err) => {
+cordova.plugins.radar.onError(
+ (err) => {
   // do something with err
 });
 ```
 
-You should remove event listeners when you are done with them (e.g., in `componentWillUnmount`):
+You should remove event listeners when you are done with them:
 
 ```js
-Radar.off('events');
+cordova.plugins.radar.offEvents();
 
-Radar.off('error');
+cordova.plugins.radar.offError();
 ```
 
 ### Manual tracking
@@ -152,9 +157,15 @@ const location = {
   accuracy: 65
 };
 
-Radar.updateLocation(location).then((result) => {
-  // do something with result.events, result.user.geofences
-}).catch((err) => {
-  // optionally, do something with err
-});
+cordova.plugins.radar.updateLocation(
+	{
+		latitude: document.getElementById('latitude').value,
+		longitude: document.getElementById('longitude').value,
+		accuracy: document.getElementById('accuracy').value
+	},
+	(result) => {
+		// do something with result.events, result.user.geofences
+		console.log(result);
+	}
+);
 ```
