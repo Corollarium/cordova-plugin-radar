@@ -3,6 +3,10 @@
 const cordova = require('cordova');
 
 const exec = (successCallback, errorCallback, action, args) => {
+	if (!successCallback) {
+		successCallback = () => {
+		};
+	}
 	if (!errorCallback) {
 		errorCallback = (error) => {
 			console.log(error);
@@ -23,38 +27,61 @@ radarExport.initialize = function(key) {
 	exec(() => {}, null, "initialize", [key]);
 };
 
-radarExport.setUserId = function(id, successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "setUserId", [id]);
+radarExport.setUserId = function(id) {
+	exec(() => {}, null, "setUserId", [id]);
 };
 
-radarExport.setDescription = function(description, successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "setDescription", [description]);
+radarExport.setDescription = function(description) {
+	exec(() => {}, null, "setDescription", [description]);
 };
 
-radarExport.setPlacesProvider = function(provider, successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "setPlacesProvider", [provider]);
+radarExport.setPlacesProvider = function(provider) {
+	exec(() => {}, null, "setPlacesProvider", [provider]);
 };
 
-radarExport.getPermissionsStatus = function(successCallback) {
-	exec(successCallback, null, "setPlacesProvider", []);
+radarExport.getPermissionsStatus = function(callback) {
+	exec(callback, null, "getPermissionsStatus", []);
 };
 
-radarExport.trackOnce = function(successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "trackOnce", []);
+radarExport.trackOnce = function(callback) {
+	exec(callback, null, "trackOnce", []);
 };
 
-radarExport.startTracking = function(
-	onEventsReceived, onLocationUpdate, onError, successCallback, errorCallback
-) {
-	exec(successCallback, errorCallback, "startTracking", []);
+radarExport.startTracking = function() {
+	exec(() => {}, null, "startTracking", []);
 };
 
-radarExport.stopTracking = function(successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "stopTracking", []);
+radarExport.stopTracking = function() {
+	exec(() => {}, null, "stopTracking", []);
 };
 
-radarExport.updateLocation = function(location, successCallback, errorCallback) {
-	exec(successCallback, errorCallback, "updateLocation", [location]);
+radarExport.acceptEvent = function(eventId, placeId) {
+	exec(() => {}, null, "acceptEvent", [eventId, placeId]);
 };
+
+radarExport.rejectEvent = function(eventId) {
+	exec(() => {}, null, "rejectEvent", [eventId]);
+};
+
+radarExport.updateLocation = function(location, callback) {
+	exec(callback, null, "updateLocation", [location]);
+};
+
+radarExport.onEvents = function(callback) {
+	exec((data) => { callback(data.events, data.user) }, null, "onEvents", []);
+};
+
+radarExport.onError = function(callback) {
+	exec((data) => { callback(data.status) }, null, "onError", []);
+};
+
+radarExport.offEvents = function(callback) {
+	exec(null, null, "onError", []);
+};
+
+radarExport.offError = function(callback) {
+	exec(null, null, "onError", []);
+};
+
 
 module.exports = radarExport;
