@@ -1,7 +1,5 @@
 [Radar](https://www.onradar.com) is the location platform for mobile apps. This is a Cordova plugin to use its SDK.
 
-*This is still under heavy work*
-
 ## Installation
 
 Install the Cordova plugin:
