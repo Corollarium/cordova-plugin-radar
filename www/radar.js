@@ -76,11 +76,11 @@ radarExport.onError = function(callback) {
 };
 
 radarExport.offEvents = function(callback) {
-	exec(null, null, "onError", []);
+	exec(null, null, "offEvents", []);
 };
 
 radarExport.offError = function(callback) {
-	exec(null, null, "onError", []);
+	exec(null, null, "offError", []);
 };
 
 
